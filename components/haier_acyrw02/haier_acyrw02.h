@@ -15,22 +15,19 @@ namespace haier_acyrw02 {
 const uint8_t HAIER_ACYRW02_TEMP_MIN = 16;  // 16C
 const uint8_t HAIER_ACYRW02_TEMP_MAX = 30;  // 32C
 
-class HaierClimate : public climate::Climate, public Component {
+class HaierClimate : public climate::Climate {
  public:
-  HaierClimate()
-      : climate::Climate() {}
+  HaierClimate() : climate::Climate() {}
  public:
   void set_sensor(sensor::Sensor *sensor);
-  void set_ir_pin(uint16_t pin);
+  void init(sensor::Sensor *sensor, uint16_t pin);
  
  protected:
   IRHaierACYRW02 *ac_{nullptr};
   sensor::Sensor *sensor_{nullptr};
-  uint16_t ir_pin_;
+  
+  void setup_ir_cmd();
 
-  void send();
-
-  void setup() override;
   climate::ClimateTraits traits() override;
   void control(const climate::ClimateCall &call) override;
 

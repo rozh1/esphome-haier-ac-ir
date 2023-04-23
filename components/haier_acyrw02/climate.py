@@ -25,6 +25,4 @@ async def to_code(config):
     await climate.register_climate(var, config)
     
     sens = await cg.get_variable(config[CONF_SENSOR_ID])
-
-    cg.add(var.set_sensor(sens))
-    cg.add(var.set_ir_pin(config[CONF_PIN]))
+    cg.add(var.init(sens, config[CONF_PIN]))
