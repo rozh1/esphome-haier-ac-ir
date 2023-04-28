@@ -113,6 +113,9 @@ void HaierClimate::control(const climate::ClimateCall &call) {
 
   if (call.get_swing_mode().has_value())
     this->swing_mode = *call.get_swing_mode();
+
+  if (call.get_preset().has_value())
+    this->preset = *call.get_preset();
   
   this->setup_ir_cmd();
   ac_->send();
